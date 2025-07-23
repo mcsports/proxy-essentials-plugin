@@ -20,6 +20,7 @@ object TagResolverHelper {
         ping: Long,
         pingColors: List<PingColor>,
         onlinePlayers: Int,
+        localOnlinePlayers: Int,
         realMaxPlayers: Int,
         motdConfiguration: MotdLayoutConfiguration
     ): List<TagResolver> {
@@ -28,6 +29,7 @@ object TagResolverHelper {
             getPingTagResolver(ping, pingColors),
             getDateTagResolver(),
             getOnlinePlayersTagResolver(onlinePlayers),
+            getLocalOnlinePlayersTagResolver(localOnlinePlayers),
             getMaxPlayersTagResolver(onlinePlayers, realMaxPlayers, motdConfiguration),
             getEnvTagResolver()
         )
@@ -58,6 +60,10 @@ object TagResolverHelper {
 
     fun getOnlinePlayersTagResolver(onlinePlayers: Int): TagResolver {
         return Placeholder.unparsed(TagResolverNames.ONLINE_PLAYERS, onlinePlayers.toString())
+    }
+
+    fun getLocalOnlinePlayersTagResolver(localOnlinePlayers: Int): TagResolver {
+        return Placeholder.unparsed(TagResolverNames.LOCAL_ONLINE_PLAYERS, localOnlinePlayers.toString())
     }
 
     fun getEnvTagResolver(): TagResolver {

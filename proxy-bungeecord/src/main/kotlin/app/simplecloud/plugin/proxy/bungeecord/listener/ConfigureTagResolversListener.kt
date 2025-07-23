@@ -17,12 +17,15 @@ class ConfigureTagResolversListener(
 
         runBlocking {
             val player = event.player
-            val serverName = player?.server?.info?.name ?: "unknown"
+            val server = player?.server
+            val serverInfo = server?.info
+            val serverName = serverInfo?.name ?: "unknown"
 
             val ping = player?.ping ?: -1
             val pingColors = plugin.proxyPlugin.placeHolderConfiguration.get().pingColors
 
             val onlinePlayers = plugin.proxy.players.size
+            val localOnlinePlayers = serverInfo?.players?.size ?: 0
             val realMaxPlayers = plugin.proxy.config.playerLimit
 
             event.withTagResolvers(
@@ -31,6 +34,7 @@ class ConfigureTagResolversListener(
                     ping.toLong(),
                     pingColors,
                     onlinePlayers,
+                    localOnlinePlayers,
                     realMaxPlayers,
                     plugin.proxyPlugin.motdLayoutHandler.getCurrentMotdLayout()
                 )
