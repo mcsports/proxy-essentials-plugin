@@ -9,5 +9,6 @@ object TagResolverNames {
     const val LOCAL_ONLINE_PLAYERS = "local_online_players"
     const val SERVER_NAME = "server_name"
     const val ENV = "env"
+    const val SERVER_NUMERICAL_ID = "server_numerical_id"
 
 }

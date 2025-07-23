@@ -28,6 +28,14 @@ class ConfigureTagResolversListener(
             val localOnlinePlayers = registeredServer?.playersConnected?.size ?: 0
             val realMaxPlayers = plugin.proxyServer.configuration.showMaxPlayers
 
+            val numericalId = serverName.let { //shame on simplecloud for not providing a function to fetch a server object from a server name
+                plugin.cloudControllerHandler.controllerApi.getServers().getAllServers().firstOrNull { server ->
+                    val builtServerName = "${server.group}-${server.numericalId}"
+
+                    serverName.equals(builtServerName, true)
+                }?.numericalId
+            } ?: -1
+
             event.withTagResolvers(
                 TagResolverHelper.getDefaultTagResolvers(
                     serverName,
@@ -36,6 +44,7 @@ class ConfigureTagResolversListener(
                     onlinePlayers,
                     localOnlinePlayers,
                     realMaxPlayers,
+                    numericalId,
                     plugin.motdLayoutHandler.getCurrentMotdLayout()
                 )
             )

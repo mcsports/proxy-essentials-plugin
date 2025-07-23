@@ -22,6 +22,7 @@ object TagResolverHelper {
         onlinePlayers: Int,
         localOnlinePlayers: Int,
         realMaxPlayers: Int,
+        numericalId: Int,
         motdConfiguration: MotdLayoutConfiguration
     ): List<TagResolver> {
         return listOf(
@@ -31,6 +32,7 @@ object TagResolverHelper {
             getOnlinePlayersTagResolver(onlinePlayers),
             getLocalOnlinePlayersTagResolver(localOnlinePlayers),
             getMaxPlayersTagResolver(onlinePlayers, realMaxPlayers, motdConfiguration),
+            getServerNumericalIdTagResolver(numericalId),
             getEnvTagResolver()
         )
     }
@@ -64,6 +66,10 @@ object TagResolverHelper {
 
     fun getLocalOnlinePlayersTagResolver(localOnlinePlayers: Int): TagResolver {
         return Placeholder.unparsed(TagResolverNames.LOCAL_ONLINE_PLAYERS, localOnlinePlayers.toString())
+    }
+
+    fun getServerNumericalIdTagResolver(numericalId: Int): TagResolver {
+        return Placeholder.unparsed(TagResolverNames.SERVER_NUMERICAL_ID, numericalId.toString())
     }
 
     fun getEnvTagResolver(): TagResolver {
