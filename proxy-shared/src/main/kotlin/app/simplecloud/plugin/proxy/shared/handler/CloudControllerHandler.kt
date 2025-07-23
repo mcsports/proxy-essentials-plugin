@@ -8,7 +8,7 @@ class CloudControllerHandler(
     private val joinStateHandler: JoinStateHandler
 ) {
 
-    private val controllerApi = ControllerApi.createCoroutineApi()
+    val controllerApi = ControllerApi.createCoroutineApi()
     private val logger = Logger.getLogger(CloudControllerHandler::class.java.name)
 
     var groupName: String? = null
